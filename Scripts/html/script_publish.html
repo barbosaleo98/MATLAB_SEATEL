@@ -1,0 +1,182 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head>
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+   <!--
+This HTML was auto-generated from MATLAB code.
+To make changes, update the MATLAB code and republish this document.
+      --><title>Script para publish</title><meta name="generator" content="MATLAB 9.1"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2021-09-01"><meta name="DC.source" content="script_publish.m"><style type="text/css">
+html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,font,img,ins,kbd,q,s,samp,small,strike,strong,sub,sup,tt,var,b,u,i,center,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td{margin:0;padding:0;border:0;outline:0;font-size:100%;vertical-align:baseline;background:transparent}body{line-height:1}ol,ul{list-style:none}blockquote,q{quotes:none}blockquote:before,blockquote:after,q:before,q:after{content:'';content:none}:focus{outine:0}ins{text-decoration:none}del{text-decoration:line-through}table{border-collapse:collapse;border-spacing:0}
+
+html { min-height:100%; margin-bottom:1px; }
+html body { height:100%; margin:0px; font-family:Arial, Helvetica, sans-serif; font-size:10px; color:#000; line-height:140%; background:#fff none; overflow-y:scroll; }
+html body td { vertical-align:top; text-align:left; }
+
+h1 { padding:0px; margin:0px 0px 25px; font-family:Arial, Helvetica, sans-serif; font-size:1.5em; color:#d55000; line-height:100%; font-weight:normal; }
+h2 { padding:0px; margin:0px 0px 8px; font-family:Arial, Helvetica, sans-serif; font-size:1.2em; color:#000; font-weight:bold; line-height:140%; border-bottom:1px solid #d6d4d4; display:block; }
+h3 { padding:0px; margin:0px 0px 5px; font-family:Arial, Helvetica, sans-serif; font-size:1.1em; color:#000; font-weight:bold; line-height:140%; }
+
+a { color:#005fce; text-decoration:none; }
+a:hover { color:#005fce; text-decoration:underline; }
+a:visited { color:#004aa0; text-decoration:none; }
+
+p { padding:0px; margin:0px 0px 20px; }
+img { padding:0px; margin:0px 0px 20px; border:none; }
+p img, pre img, tt img, li img, h1 img, h2 img { margin-bottom:0px; } 
+
+ul { padding:0px; margin:0px 0px 20px 23px; list-style:square; }
+ul li { padding:0px; margin:0px 0px 7px 0px; }
+ul li ul { padding:5px 0px 0px; margin:0px 0px 7px 23px; }
+ul li ol li { list-style:decimal; }
+ol { padding:0px; margin:0px 0px 20px 0px; list-style:decimal; }
+ol li { padding:0px; margin:0px 0px 7px 23px; list-style-type:decimal; }
+ol li ol { padding:5px 0px 0px; margin:0px 0px 7px 0px; }
+ol li ol li { list-style-type:lower-alpha; }
+ol li ul { padding-top:7px; }
+ol li ul li { list-style:square; }
+
+.content { font-size:1.2em; line-height:140%; padding: 20px; }
+
+pre, code { font-size:12px; }
+tt { font-size: 1.2em; }
+pre { margin:0px 0px 20px; }
+pre.codeinput { padding:10px; border:1px solid #d3d3d3; background:#f7f7f7; }
+pre.codeoutput { padding:10px 11px; margin:0px 0px 20px; color:#4c4c4c; }
+pre.error { color:red; }
+
+@media print { pre.codeinput, pre.codeoutput { word-wrap:break-word; width:100%; } }
+
+span.keyword { color:#0000FF }
+span.comment { color:#228B22 }
+span.string { color:#A020F0 }
+span.untermstring { color:#B20000 }
+span.syscmd { color:#B28C00 }
+
+.footer { width:auto; padding:10px 0px; margin:25px 0px 0px; border-top:1px dotted #878787; font-size:0.8em; line-height:140%; font-style:italic; color:#878787; text-align:left; float:none; }
+.footer p { margin:0px; }
+.footer a { color:#878787; }
+.footer a:hover { color:#878787; text-decoration:underline; }
+.footer a:visited { color:#878787; }
+
+table th { padding:7px 5px; text-align:left; vertical-align:middle; border: 1px solid #d6d4d4; font-weight:bold; }
+table td { padding:7px 5px; text-align:left; vertical-align:top; border:1px solid #d6d4d4; }
+
+
+
+
+
+  </style></head><body><div class="content"><h1>Script para publish</h1><p>Programa desenvolvido para demonstrar funcionalidades MATLAB para exportar relat&oacute;rios</p><pre class="codeinput"><span class="comment">% Fun&ccedil;&otilde;es de inicializa&ccedil;&atilde;o padr&atilde;o</span>
+clc
+clear <span class="string">all</span>
+close <span class="string">all</span>
+</pre><pre>Utilizaremos como exemplo a fun&ccedil;&atilde;o de m&eacute;dia m&oacute;vel
+Come&ccedil;amos com a cria&ccedil;&atilde;o de um vetor x que vai
+de 0 at&eacute; 2*pi com 100 pontos. Em seguida, uma onda quadrada
+&eacute; criada e passa por um canal awgn com SNR de 25 dB</pre><pre class="codeinput">x = linspace(0,2*pi*2,100);
+y = square(x);
+y_channel = awgn(y,25);
+</pre><p>Antes de aplicarmos a m&eacute;dia m&oacute;vel, devemos lembrar que:</p><p><img src="script_publish_eq00898044525605388815.png" alt="$f(x)=\frac{1}{L}(y(n)+y(n-1)+...+y(n-(L-1)))$"></p><p>No script, podemos fazer isso da seguinte forma:</p><pre class="codeinput">L = 3;
+B = ones(1,L)/L;
+y_filtered = filter(B,1,y_channel);
+</pre><p>Agora que temos uma sa&iacute;da filtrada, podemos avaliar graficamente o resultado:</p><pre class="codeinput">figure(1)
+hold <span class="string">on</span>
+plot(x,y)
+plot(x,y_channel)
+plot(x,y_filtered)
+title(<span class="string">'M&eacute;dia m&oacute;vel para L =3'</span>)
+xlabel(<span class="string">'x'</span>)
+ylabel(<span class="string">'y(x)'</span>)
+legend(<span class="string">'y base'</span>,<span class="string">'y ruidoso'</span>,<span class="string">'y filtrado'</span>)
+xlim([-0.5 4*pi+0.5])
+ylim([min(y_channel)-0.2 max(y_channel)+0.2])
+</pre><img vspace="5" hspace="5" src="script_publish_01.png" alt=""> <p>Podemos tamb&eacute;m avaliar uma janela m&oacute;vel maior:</p><pre class="codeinput">L = 8;
+B = ones(1,L)/L;
+y_filtered = filter(B,1,y_channel);
+
+figure(2)
+hold <span class="string">on</span>
+plot(x,y)
+plot(x,y_channel)
+plot(x,y_filtered)
+title(<span class="string">'M&eacute;dia m&oacute;vel para L=8'</span>)
+xlabel(<span class="string">'x'</span>)
+ylabel(<span class="string">'y(x)'</span>)
+legend(<span class="string">'y base'</span>,<span class="string">'y ruidoso'</span>,<span class="string">'y filtrado'</span>)
+xlim([-0.5 4*pi+0.5])
+ylim([min(y_channel)-0.2 max(y_channel)+0.2])
+</pre><img vspace="5" hspace="5" src="script_publish_02.png" alt=""> <p><b>Conclus&atilde;o:</b> Conforme esperado, conforme maior a janela mais suave a curva, por&eacute;m maior o atraso tamb&eacute;m.</p><p class="footer"><br><a href="http://www.mathworks.com/products/matlab/">Published with MATLAB&reg; R2016b</a><br></p></div><!--
+##### SOURCE BEGIN #####
+%% Script para publish
+% Programa desenvolvido para demonstrar funcionalidades 
+% MATLAB para exportar relatórios
+
+% Funções de inicialização padrão
+clc
+clear all
+close all
+%%
+% 
+%  Utilizaremos como exemplo a função de média móvel
+%  Começamos com a criação de um vetor x que vai 
+%  de 0 até 2*pi com 100 pontos. Em seguida, uma onda quadrada
+%  é criada e passa por um canal awgn com SNR de 25 dB
+
+x = linspace(0,2*pi*2,100); 
+y = square(x);
+y_channel = awgn(y,25);
+
+%%
+%
+% Antes de aplicarmos a média móvel, devemos lembrar que:
+%%
+% $f(x)=\frac{1}{L}(y(n)+y(n-1)+...+y(n-(L-1)))$ 
+% 
+% No script, podemos fazer isso da seguinte forma:
+
+L = 3;
+B = ones(1,L)/L; 
+y_filtered = filter(B,1,y_channel); 
+
+%%
+% Agora que temos uma saída filtrada, podemos avaliar 
+% graficamente o resultado:
+%
+
+figure(1)
+hold on
+plot(x,y)
+plot(x,y_channel)
+plot(x,y_filtered)
+title('Média móvel para L =3')
+xlabel('x')
+ylabel('y(x)')
+legend('y base','y ruidoso','y filtrado')
+xlim([-0.5 4*pi+0.5])
+ylim([min(y_channel)-0.2 max(y_channel)+0.2])
+
+%%
+% Podemos também avaliar uma janela móvel maior:
+%
+
+L = 8;
+B = ones(1,L)/L; 
+y_filtered = filter(B,1,y_channel); 
+
+figure(2)
+hold on
+plot(x,y)
+plot(x,y_channel)
+plot(x,y_filtered)
+title('Média móvel para L=8')
+xlabel('x')
+ylabel('y(x)')
+legend('y base','y ruidoso','y filtrado')
+xlim([-0.5 4*pi+0.5])
+ylim([min(y_channel)-0.2 max(y_channel)+0.2])
+
+%%
+% *Conclusão:* Conforme esperado, conforme maior a janela
+% mais suave a curva, porém maior o atraso também.
+##### SOURCE END #####
+--></body></html>
